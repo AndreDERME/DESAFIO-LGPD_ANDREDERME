@@ -1,10 +1,10 @@
 //carousel
 
-//Array storage class
+
 let carouselArr = [];
 
 
-//class Carousel
+
 class Carousel {
 
     constructor(image, title, uri) {
