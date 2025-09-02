@@ -29,7 +29,7 @@ class Carousel {
         Carousel._sequence = 0;
 
         Carousel.Next(); 
-        Carousel._interval = setInterval(Carousel.Next, 3000); 
+        Carousel._interval = setInterval(Carousel.Next, 2000); 
     }
 
     static Stop() {
@@ -68,9 +68,9 @@ class Carousel {
 }
 
 
-carouselArr.push(new Carousel("imagem1.jpg", "Título da Notícia 1", "https://site.com/noticia1"));
-carouselArr.push(new Carousel("imagem2.jpg", "Título da Notícia 2", "https://site.com/noticia2"));
-carouselArr.push(new Carousel("imagem3.jpg", "Título da Notícia 3", "https://site.com/noticia3"));
+carouselArr.push(new Carousel("imagem1.jpg", "Esta é a nova Ranger Ford 2022. Verifique novidades.", "https://site.com/noticia1"));
+carouselArr.push(new Carousel("imagem2.jpg", "Ford a nossa história", "https://site.com/noticia2"));
+carouselArr.push(new Carousel("imagem3.jpg", "Nova Ford Bronco Sport 2022", "https://site.com/noticia3"));
 
 
 document.addEventListener('DOMContentLoaded', () => {
