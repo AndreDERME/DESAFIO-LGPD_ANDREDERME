@@ -11,9 +11,12 @@ html {
 }
 
 div#carousel {
+    display: block;
+    text-align: center;
+    margin: auto;
     height: 67vh;
-    width: 100%;
-     max-height: 628px;
+    width: 90%;
+     max-height: 700px;
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
