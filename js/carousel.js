@@ -1,13 +1,13 @@
-// Array para armazenar os itens do carrossel
+
+
+//carousel
+
+//Array storage class
 let carouselArr = [];
 
-class Carousel {
 
-    
-    static _interval = null;
-    static _sequence = 0;
-    static _size = 0;
-    static _arr = [];
+//class Carousel
+class Carousel {
 
     constructor(image, title, uri) {
         this.image = image;
@@ -15,64 +15,38 @@ class Carousel {
         this.uri = uri;
     }
 
-    
     static Start(arr) {
-        if (!arr || arr.length === 0) {
-            throw new Error("O método Start precisa receber um array com itens.");
-        }
+        if (arr && arr.length > 0) {
+            Carousel._sequence = 0;
+            Carousel._size = arr.length;
+            Carousel._arr = arr;
+            Carousel.Next(); //start
+            Carousel._interval = setInterval(function () { Carousel.Next(); }, 2000);
 
-        
-        Carousel.Stop();
-
-        Carousel._arr = arr;
-        Carousel._size = arr.length;
-        Carousel._sequence = 0;
-
-        Carousel.Next(); 
-        Carousel._interval = setInterval(Carousel.Next, 2000); 
-    }
-
-    static Stop() {
-        if (Carousel._interval) {
-            clearInterval(Carousel._interval);
-            Carousel._interval = null;
+        } else {
+            
+            throw "O método Start precisa receber um array válido."
         }
     }
 
-    
     static Next() {
-        const carouselElement = document.getElementById("carousel");
+        const carrouselElement = document.getElementById("carousel");
         const titleElement = document.getElementById("carousel-title");
 
-        if (!carouselElement || !titleElement) {
-            console.error("Elementos do carrossel (#carousel ou #carousel-title) não encontrados no DOM.");
-            Carousel.Stop();
+        if (!carrouselElement || !titleElement){
+            console.error("Elementos do carrossel não encontrados!");
+            return;
         }
 
         const item = Carousel._arr[Carousel._sequence];
 
-        
-        carouselElement.style.backgroundImage = `url(img/${item.image})`;
+        carrouselElement.style.backgroundImage = `url(img/${item.image})`;
+        carrouselElement.style.backgroundPosition = "center";
+        carrouselElement.style.backgroundSize = "cover";
+        carrouselElement.style.transition = "background-image 0.5s ease-in-out";
 
-        
-        titleElement.innerHTML = ''; 
-        const link = document.createElement('a');
-        link.href = item.uri;
-        link.textContent = item.title;
-        
-        titleElement.appendChild(link);
-
+        titleElement.innerHTML = `<a href= "${item.uri}"> ${item.title}</a>`;
         
         Carousel._sequence = (Carousel._sequence + 1) % Carousel._size;
     }
-}
-
-
-carouselArr.push(new Carousel("imagem1.jpg", "Esta é a nova Ranger Ford 2022. Verifique novidades.", "https://site.com/noticia1"));
-carouselArr.push(new Carousel("imagem2.jpg", "Ford a nossa história", "https://site.com/noticia2"));
-carouselArr.push(new Carousel("imagem3.jpg", "Nova Ford Bronco Sport 2022", "https://site.com/noticia3"));
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    Carousel.Start(carouselArr);
-});
+};
